@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'flights',
 ]
 
 MIDDLEWARE = [
@@ -126,9 +128,9 @@ STATIC_URL = '/static/'
 # Rest framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest-framework.authentication.SessionAuthentication'
+        'rest_framework.authentication.SessionAuthentication'
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest-framework.permissions.IsAuthenticatedOrReadOnly'
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly'
     ]
 }
