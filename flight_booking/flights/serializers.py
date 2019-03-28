@@ -4,8 +4,20 @@ from . import models
 
 class FlightSerializer(serializers.ModelSerializer):
     class Meta:
+        extra_kwargs = {
+            'no_of_seats': {'write_only': True}
+        }
+
         model = models.Flight
-        fields = '__all__'
+        fields = [
+            'id',
+            'from_location',
+            'to_location',
+            'departure_time',
+            'arrival_time',
+            'price',
+            'no_of_seats',
+        ]
 
     def validate(self, data):
         """
@@ -17,3 +29,8 @@ class FlightSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('from and to location cannot be the same')
         return data
 
+
+class BookingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Booking
+        fields = '__all__'
