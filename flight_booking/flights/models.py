@@ -51,14 +51,3 @@ class Booking(models.Model):
     flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     booked = models.BooleanField(default=False)
-
-    def save(self, force_insert=False, force_update=True, using=None,
-             update_fields=None, *args, **kwargs):
-        exist = Booking.objects.filter(user=self.user, flight=self.flight, booked=self.booked).count()
-        if exist:
-            from django.db import IntegrityError
-            raise IntegrityError(
-                "User has booked this flight already"
-            )
-        return super(Booking, self).save(*args, **kwargs)
-

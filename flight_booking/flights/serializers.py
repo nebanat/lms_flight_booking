@@ -17,6 +17,7 @@ class FlightSerializer(serializers.ModelSerializer):
             'arrival_time',
             'price',
             'no_of_seats',
+            'passengers',
         ]
 
     def validate(self, data):
