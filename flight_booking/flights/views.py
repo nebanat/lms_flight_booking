@@ -57,6 +57,7 @@ class FlightBookingView(APIView):
         serializer = serializers.FlightSerializer(flight)
         booking, created = models.Booking.objects.get_or_create(flight=flight, user=request.user)
         booking.booked = request.data.get('booked', True)
+        booking.save()
         return Response({
             'message': 'flight successfully booked',
             'data': {
