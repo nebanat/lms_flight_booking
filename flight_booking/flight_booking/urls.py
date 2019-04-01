@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 
-from flights.views import FlightViewSet
+from flights.views import FlightViewSet, FlightBookingView
 
 
 # rest framework imports
@@ -26,9 +26,11 @@ from rest_framework import routers
 
 router = routers.SimpleRouter()
 router.register(r'flights', FlightViewSet)
+# router.register(r'(?P<flight_pk>\d+)reserve/$', FlightBookingView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/users/', include('users.urls')),
+    path('flight/', include('flights.urls')),
     url(r'^api/v1/', include((router.urls, 'flights'), namespace='apiv1')),
 ]
