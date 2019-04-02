@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from . import models, serializers
-from .helpers import get_object_or_none
+from .helpers.email_helpers import send_email_with_booked_flight_details
+from .helpers.db_helpers import get_object_or_none
 from rest_framework.permissions import AllowAny
-from rest_framework.decorators import permission_classes, detail_route
+from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
@@ -58,10 +59,13 @@ class FlightBookingView(APIView):
         booking, created = models.Booking.objects.get_or_create(flight=flight, user=request.user)
         booking.booked = request.data.get('booked', True)
         booking.save()
+
+        send_email_with_booked_flight_details(booking)  # runs on different thread
+
         return Response({
             'message': 'flight successfully booked',
             'data': {
                 'flight_details': serializer.data,
                 'booked': booking.booked
             }
-        }, status=status.HTTP_201_CREATED)
+        }, status=status.HTTP_200_OK)
