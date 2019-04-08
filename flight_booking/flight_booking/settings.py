@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'flights',
     'users',
+    'files',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -70,6 +71,10 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'abiliyok@gmail.com'
 
 EMAIL_HOST_PASSWORD = 'tiesan123'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

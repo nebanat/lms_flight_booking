@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
+from django.conf.urls.static import static
+from django.conf import settings
 
 from flights.views import FlightViewSet, FlightBookingView
 
@@ -31,6 +33,10 @@ router.register(r'flights', FlightViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/users/', include('users.urls')),
-    path('flight/', include('flights.urls')),
+    path('api/v1/flight/', include('flights.urls')),
+    path('api/v1/file/', include('files.urls')),
     url(r'^api/v1/', include((router.urls, 'flights'), namespace='apiv1')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
