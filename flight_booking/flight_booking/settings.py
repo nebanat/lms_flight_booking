@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from celery.schedules import crontab
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'flights',
     'users',
     'files',
+    'django_celery_beat',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -75,6 +77,15 @@ EMAIL_HOST_PASSWORD = 'tiesan123'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+CELERY_BROKER_URL = 'amqp://localhost'
+
+CELERY_BEAT_SCHEDULE = {
+    'send_flight_remainder_email': {
+        'task': 'flights.tasks.send_flight_remainder_task',
+        'schedule': crontab(minute=0, hour=0),  # execute daily at midnight
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
