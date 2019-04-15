@@ -80,6 +80,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CELERY_BROKER_URL = 'amqp://localhost'
 
+MAX_UPLOAD_SIZE = 2621440
+
 CELERY_BEAT_SCHEDULE = {
     'send_flight_remainder_email': {
         'task': 'flights.tasks.send_flight_remainder_task',

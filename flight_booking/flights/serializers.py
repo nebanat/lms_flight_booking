@@ -3,6 +3,9 @@ from . import models
 
 
 class FlightSerializer(serializers.ModelSerializer):
+    """
+    flight serializer
+    """
     class Meta:
         extra_kwargs = {
             'no_of_seats': {'write_only': True}

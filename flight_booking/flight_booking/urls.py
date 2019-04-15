@@ -28,7 +28,7 @@ from rest_framework import routers
 
 router = routers.SimpleRouter()
 router.register(r'flights', FlightViewSet)
-# router.register(r'(?P<flight_pk>\d+)reserve/$', FlightBookingView)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
