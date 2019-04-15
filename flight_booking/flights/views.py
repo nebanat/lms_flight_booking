@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from . import models, serializers, services as flight_services
-# from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
@@ -60,6 +60,8 @@ class FlightBookingView(APIView):
 
 
 class FlightPassengers(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, flight_pk=None):
         flight = get_object_or_404(models.Flight, pk=flight_pk)
         flight_details, passengers, passengers_count = flight_services.get_flight_passenger_count(flight)
