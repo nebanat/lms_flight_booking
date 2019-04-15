@@ -4,6 +4,12 @@ from .helpers.db import get_object_or_none
 from .helpers.email import send_email_with_booked_flight_details
 from rest_framework.exceptions import APIException
 
+from django.contrib.auth import get_user_model
+
+from users.serializers import UserSerializer
+
+User = get_user_model()
+
 
 def reserve_flight(requestor, flight):
     """
@@ -49,3 +55,18 @@ def book_flight(requestor, flight, data):
     send_email_with_booked_flight_details(booking)  # runs on different thread
 
     return flight_serializer.data, booking_serializer.data
+
+
+def get_flight_passenger_count(flight):
+    """
+
+    :param flight:
+    :return:
+    """
+    flight_serializer = serializers.FlightSerializer(flight)
+    passengers_set = User.objects.filter(
+        booking__flight=flight.id,
+        booking__booked=True
+    )
+    passengers = UserSerializer(passengers_set, many=True)
+    return flight_serializer.data, passengers.data, passengers_set.count()

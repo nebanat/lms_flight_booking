@@ -57,3 +57,18 @@ class FlightBookingView(APIView):
                 'booking': booking_details
             }
         }, status=status.HTTP_200_OK)
+
+
+class FlightPassengers(APIView):
+    def get(self, request, flight_pk=None):
+        flight = get_object_or_404(models.Flight, pk=flight_pk)
+        flight_details, passengers, passengers_count = flight_services.get_flight_passenger_count(flight)
+
+        return Response({
+            'data': {
+                'total_no_of_passengers': passengers_count,
+                'flight_details': flight_details,
+                'passengers': passengers
+            }
+        })
+
