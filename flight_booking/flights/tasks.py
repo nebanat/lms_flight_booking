@@ -8,4 +8,8 @@ User = get_user_model()
 
 @shared_task
 def send_flight_remainder_task():
+    """
+    task to send flight reminder to passengers flying in 24 hours
+    :return:
+    """
     return send_ticket_reminder()
