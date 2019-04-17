@@ -24,7 +24,7 @@ jobs:
             source venv/bin/activate
             cd flight_booking
             sudo pip install -r requirements.txt
-      # save cache dependecies to save time between runs,
+      # save cache dependecies to save time between runs
       - save_cache:
           paths:
             - ./venv
