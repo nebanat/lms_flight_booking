@@ -1,1 +1,0 @@
-web: gunicorn flight_booking.wsgi
