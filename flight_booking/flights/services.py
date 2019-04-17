@@ -2,7 +2,9 @@ from django.forms.models import model_to_dict
 from . import models, serializers
 from .helpers.db import get_object_or_none
 from .helpers.email import send_email_with_booked_flight_details
-from rest_framework.exceptions import APIException
+from .exceptions import CustomException
+from rest_framework import status
+# from rest_framework.exceptions import APIException
 
 from django.contrib.auth import get_user_model
 
@@ -22,7 +24,7 @@ def reserve_flight(requestor, flight):
     booking = get_object_or_none(models.Booking, user=requestor, flight=flight)
 
     if booking:
-        raise APIException('You have already reserve this flight')
+        raise CustomException('You have already reserve this flight', 'message', status_code=status.HTTP_409_CONFLICT)
 
     booking = models.Booking(flight=flight, user=requestor)
     booking_serializer = serializers.BookingSerializer(

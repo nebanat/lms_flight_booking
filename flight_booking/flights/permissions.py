@@ -8,7 +8,6 @@ class IsSuperUserOrReadOnly(permissions.BasePermission):
         Other users are allow to view flights
         :param request:
         :param view:
-        :param obj:
         :return:
         """
         if request.method in permissions.SAFE_METHODS:
