@@ -1,5 +1,7 @@
 # Flight booking system
 
+[![CircleCI](https://circleci.com/gh/nebanat/lms_flight_booking.svg?style=svg)](https://circleci.com/gh/nebanat/lms_flight_booking)
+
 ## Features
 - Create an account with username(optional), email and password
 - Login with email and password
