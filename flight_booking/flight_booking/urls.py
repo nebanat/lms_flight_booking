@@ -19,7 +19,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 
-from flights.views import FlightViewSet, FlightBookingView
+from flights.views import FlightViewSet, FlightBookingView, index
 
 
 # rest framework imports
@@ -31,6 +31,7 @@ router.register(r'flights', FlightViewSet)
 
 
 urlpatterns = [
+    path('', index, name='index'),
     path('admin/', admin.site.urls),
     path('api/v1/users/', include('users.urls')),
     path('api/v1/flight/', include('flights.urls')),
