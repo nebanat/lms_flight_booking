@@ -19,7 +19,8 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            python3 -m venv venv
+            pip install virtualenv
+            python3 -m virtual venv
             source venv/bin/activate
             cd flight_booking
             sudo pip install -r requirements.txt
