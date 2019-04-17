@@ -21,6 +21,7 @@ jobs:
           command: |
             python3 -m venv venv
             source venv/bin/activate
+            cd flight_booking
             sudo pip install -r requirements.txt
       # save cache dependecies to save time between runs,
       - save_cache:
@@ -32,6 +33,7 @@ jobs:
           name: run tests
           command: |
              source venv/bin/activate
+             cd flight_booking
              python manage.py test
           # override:
           #     - coverage run manage.py test apps
