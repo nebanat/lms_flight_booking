@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
