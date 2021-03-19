@@ -9,7 +9,7 @@ django-allauth==0.39.1
 django-celery-beat==1.4.0
 django-rest-auth==0.9.3
 django-timezone-field==3.0
-djangorestframework==3.9.2
+djangorestframework==3.11.2
 idna==2.8
 kombu==4.5.0
 oauthlib==3.0.1
